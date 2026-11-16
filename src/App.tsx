@@ -10,6 +10,13 @@ import { OrderTrackingPage } from './components/OrderTrackingPage.tsx';
 import { PolicyModal, type PolicyTopic } from './components/PolicyModal.tsx';
 import { ProductDetailView } from './components/ProductDetailView.tsx';
 import { PRODUCTS, SEED_ORDER } from './data/catalog.ts';
+import {
+  confirmDeliveryLocally,
+  createOrderLocally,
+  lookupOrderLocally,
+  updateOrderInstructionLocally,
+  verifyPaymentLocally,
+} from './utils/localOrderFallback.ts';
 import type {
   CartItem,
   CategorySlug,
@@ -207,39 +214,60 @@ export default function App() {
   };
 
   const handleSubmitOrder = async (form: CheckoutFormData, idempotencyKey: string) => {
-    const response = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        idempotencyKey,
-        items: cartItems.map((it) => ({
-          productId: it.productId,
-          variantId: it.variantId,
-          quantity: it.qty,
-        })),
-        form,
-      }),
-    });
+    let createdOrder: OrderRecord | null = null;
+    let updatedProducts: Product[] | null = null;
 
-    const data = (await response.json()) as {
-      order?: OrderRecord;
-      products?: Product[];
-      error?: string;
-    };
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          idempotencyKey,
+          items: cartItems.map((it) => ({
+            productId: it.productId,
+            variantId: it.variantId,
+            quantity: it.qty,
+          })),
+          form,
+        }),
+      });
 
-    if (!response.ok || !data.order) {
-      throw new Error(data.error || 'Terjadi kesalahan saat membuat pesanan.');
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const data = (await response.json()) as {
+          order?: OrderRecord;
+          products?: Product[];
+          error?: string;
+        };
+        if (!response.ok || !data.order) {
+          throw new Error(data.error || 'Terjadi kesalahan saat membuat pesanan.');
+        }
+        createdOrder = data.order;
+        updatedProducts = data.products || null;
+      } else {
+        const local = createOrderLocally(products, cartItems, form);
+        createdOrder = local.order;
+        updatedProducts = local.updatedProducts;
+      }
+    } catch (err) {
+      if (err instanceof TypeError) {
+        const local = createOrderLocally(products, cartItems, form);
+        createdOrder = local.order;
+        updatedProducts = local.updatedProducts;
+      } else {
+        throw err;
+      }
     }
 
-    if (data.products) {
-      setProducts(data.products);
+    if (updatedProducts) {
+      setProducts(updatedProducts);
     }
 
     setCartItems([]);
     setPromoCode('');
     setCheckoutOpen(false);
-    setTrackedOrder(data.order);
-    setSuccessOrder(data.order);
+    setTrackedOrder(createdOrder);
+    setSuccessOrder(createdOrder);
   };
 
   const handleLookupOrder = async (orderNumber: string) => {
@@ -247,52 +275,112 @@ export default function App() {
     const cleaned = encodeURIComponent(orderNumber.replace(/^#/, ''));
     try {
       const res = await fetch(`/api/orders/${cleaned}`);
-      const data = (await res.json()) as { order?: OrderRecord; error?: string };
-      if (!res.ok || !data.order) {
-        setLookupError(data.error || 'Nomor pesanan tidak ditemukan.');
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const data = (await res.json()) as { order?: OrderRecord; error?: string };
+        if (!res.ok || !data.order) {
+          const localOrder = lookupOrderLocally(orderNumber);
+          if (localOrder) {
+            setTrackedOrder(localOrder);
+            showToast(`Menampilkan status pengiriman ${localOrder.orderNumber}`);
+            return;
+          }
+          setLookupError(data.error || 'Nomor pesanan tidak ditemukan.');
+          return;
+        }
+        setTrackedOrder(data.order);
+        showToast(`Menampilkan status pengiriman ${data.order.orderNumber}`);
         return;
       }
-      setTrackedOrder(data.order);
-      showToast(`Menampilkan status pengiriman ${data.order.orderNumber}`);
     } catch {
-      setLookupError('Gagal menghubungi server pelacakan. Periksa koneksi Anda.');
+      // Fallback below
+    }
+
+    const localOrder = lookupOrderLocally(orderNumber);
+    if (localOrder) {
+      setTrackedOrder(localOrder);
+      showToast(`Menampilkan status pengiriman ${localOrder.orderNumber}`);
+    } else {
+      setLookupError(`Pesanan ${orderNumber} tidak ditemukan. Periksa kembali nomor pesanan Anda.`);
     }
   };
 
   const handleUpdateInstruction = async (orderNumber: string, instruction: string) => {
     const cleaned = encodeURIComponent(orderNumber.replace(/^#/, ''));
-    const res = await fetch(`/api/orders/${cleaned}/instruction`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ instruction }),
-    });
-    const data = (await res.json()) as { order?: OrderRecord };
-    if (res.ok && data.order) {
-      setTrackedOrder(data.order);
+    try {
+      const res = await fetch(`/api/orders/${cleaned}/instruction`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instruction }),
+      });
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const data = (await res.json()) as { order?: OrderRecord };
+        if (res.ok && data.order) {
+          setTrackedOrder(data.order);
+          showToast('Instruksi kurir berhasil diperbarui.');
+          return;
+        }
+      }
+    } catch {
+      // Fallback below
+    }
+
+    const updated = updateOrderInstructionLocally(orderNumber, instruction);
+    if (updated) {
+      setTrackedOrder(updated);
       showToast('Instruksi kurir berhasil diperbarui.');
     }
   };
 
   const handleConfirmDelivery = async (orderNumber: string) => {
     const cleaned = encodeURIComponent(orderNumber.replace(/^#/, ''));
-    const res = await fetch(`/api/orders/${cleaned}/confirm-delivery`, {
-      method: 'PATCH',
-    });
-    const data = (await res.json()) as { order?: OrderRecord };
-    if (res.ok && data.order) {
-      setTrackedOrder(data.order);
+    try {
+      const res = await fetch(`/api/orders/${cleaned}/confirm-delivery`, {
+        method: 'PATCH',
+      });
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const data = (await res.json()) as { order?: OrderRecord };
+        if (res.ok && data.order) {
+          setTrackedOrder(data.order);
+          showToast('Terima kasih! Pesanan telah dikonfirmasi selesai.');
+          return;
+        }
+      }
+    } catch {
+      // Fallback below
+    }
+
+    const updated = confirmDeliveryLocally(orderNumber);
+    if (updated) {
+      setTrackedOrder(updated);
       showToast('Terima kasih! Pesanan telah dikonfirmasi selesai.');
     }
   };
 
   const handleVerifyPaymentDemo = async (orderNumber: string) => {
     const cleaned = encodeURIComponent(orderNumber.replace(/^#/, ''));
-    const res = await fetch(`/api/orders/${cleaned}/verify-payment`, {
-      method: 'PATCH',
-    });
-    const data = (await res.json()) as { order?: OrderRecord };
-    if (res.ok && data.order) {
-      setTrackedOrder(data.order);
+    try {
+      const res = await fetch(`/api/orders/${cleaned}/verify-payment`, {
+        method: 'PATCH',
+      });
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const data = (await res.json()) as { order?: OrderRecord };
+        if (res.ok && data.order) {
+          setTrackedOrder(data.order);
+          showToast('Pembayaran terverifikasi! Paket kini dalam pengiriman ekspedisi.');
+          return;
+        }
+      }
+    } catch {
+      // Fallback below
+    }
+
+    const updated = verifyPaymentLocally(orderNumber);
+    if (updated) {
+      setTrackedOrder(updated);
       showToast('Pembayaran terverifikasi! Paket kini dalam pengiriman ekspedisi.');
     }
   };
