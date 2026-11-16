@@ -1,0 +1,1082 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>HerbalStore — Pilihan Herbal Alami, Lebih Mudah Dipahami</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            herbal: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#134e4a',
+              dark: '#142820',
+            },
+            surface: {
+              base: '#FAFAF9',
+              card: '#FFFFFF',
+              border: '#E7ECE9',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style data-purpose="custom-scrollbars">
+    /* Custom subtle scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F3;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #059669;
+    }
+  </style>
+<style data-purpose="transitions">
+    .cart-drawer-transition {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+    .badge-pulse {
+      animation: pulse-badge 2s infinite;
+    }
+    @keyframes pulse-badge {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+  </style>
+</head>
+<body class="bg-surface-base text-[#1A2E26] font-sans antialiased min-h-screen flex flex-col selection:bg-herbal-100 selection:text-herbal-800">
+<!-- BEGIN: AnnouncementBar -->
+<aside class="bg-herbal-900 text-herbal-100 text-xs py-2 px-4 border-b border-herbal-800/60" data-purpose="top-announcement">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+<div class="flex items-center gap-2 text-center sm:text-left">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-herbal-600 text-white tracking-wide uppercase">BPOM Terverifikasi</span>
+<span>Jaminan produk herbal alami terdaftar resmi. Gratis ongkir min. belanja Rp 150.000.</span>
+</div>
+<div class="flex items-center gap-5 text-xs text-herbal-200">
+<a class="hover:text-white transition-colors flex items-center gap-1" href="#edukasi">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" class="lucide lucide-shield-check w-3.5 h-3.5 text-herbal-500"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg> Panduan Konsumsi Aman
+        </a>
+<span class="hidden md:inline text-herbal-700">|</span>
+<span class="hidden md:inline">Layanan Pelanggan: 08.00 - 17.00 WIB</span>
+</div>
+</div>
+</aside>
+<!-- END: AnnouncementBar -->
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border shadow-xs">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20 gap-4">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2.5 shrink-0 group" href="#">
+<div class="w-10 h-10 rounded-xl bg-herbal-600 flex items-center justify-center text-white shadow-md shadow-herbal-600/20 group-hover:bg-herbal-700 transition">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sprout" aria-hidden="true" class="lucide lucide-sprout w-6 h-6"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"></path><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"></path><path d="M5 21h14"></path></svg>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-herbal-dark font-sans flex items-center">
+              Herbal<span class="text-herbal-600">Store</span>
+<span class="ml-1 w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+</span>
+<span class="text-[10px] tracking-wider text-neutral-500 uppercase font-medium">Katalog Terpercaya</span>
+</div>
+</a>
+<!-- Search Bar -->
+<div class="flex-1 max-w-xl mx-4 hidden md:block">
+<div class="relative">
+<label class="sr-only" for="search-input">Cari produk herbal</label>
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" aria-hidden="true" class="lucide lucide-search w-4 h-4"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+</div>
+<input class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-herbal-600 focus:border-transparent transition-all" id="search-input" oninput="handleSearch(this.value)" placeholder="Cari nama produk herbal, temulawak, madu, habbatussauda..." type="text">
+<button aria-label="Bersihkan pencarian" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600" id="clear-search-btn" onclick="clearSearch()">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-4 h-4"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+</button>
+</div>
+</div>
+<!-- Navigation Links & Cart Action -->
+<nav aria-label="Navigasi Utama" class="flex items-center gap-6">
+<ul class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-700">
+<li><a class="hover:text-herbal-600 transition-colors" href="#kategori">Sistem Tubuh</a></li>
+<li><a class="hover:text-herbal-600 transition-colors" href="#katalog">Katalog Pilihan</a></li>
+<li><a class="hover:text-herbal-600 transition-colors" href="#promo">Promo</a></li>
+<li><a class="hover:text-herbal-600 transition-colors" href="#edukasi">Transparansi</a></li>
+</ul>
+<div class="flex items-center gap-3">
+<!-- Mobile Search Icon Toggle -->
+<button aria-label="Buka pencarian" class="md:hidden p-2 text-slate-600 hover:text-herbal-600 rounded-lg hover:bg-slate-100" onclick="toggleMobileSearch()">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" aria-hidden="true" class="lucide lucide-search w-5 h-5"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+</button>
+<!-- Cart Trigger Button -->
+<button aria-label="Buka keranjang belanja" class="relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-herbal-50 text-herbal-700 hover:bg-herbal-100 border border-herbal-200/80 transition-all font-medium text-sm focus:ring-2 focus:ring-herbal-500 focus:outline-none" id="cart-toggle-btn" onclick="toggleCartDrawer(true)">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag w-4 h-4 text-herbal-600"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>
+<span class="hidden sm:inline">Keranjang</span>
+<span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-herbal-600 rounded-full" id="cart-badge-count">3</span>
+</button>
+</div>
+</nav></div>
+</div>
+<!-- Mobile Search Bar (Collapsible) -->
+<div class="hidden pb-4 md:hidden" id="mobile-search-bar">
+<div class="relative">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" aria-hidden="true" class="lucide lucide-search w-4 h-4 text-slate-400 absolute left-3 top-3"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+<input class="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-herbal-600 focus:bg-white" oninput="handleSearch(this.value)" placeholder="Cari kapsul, madu, ekstrak herbal..." type="text">
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroSection -->
+<main class="flex-grow">
+<section class="relative bg-gradient-to-b from-[#EDF5F1] via-[#F4F9F6] to-surface-base pt-8 pb-16 overflow-hidden">
+<!-- Decorative natural blur background -->
+<div class="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 rounded-full bg-emerald-200/40 blur-3xl pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-teal-100/50 blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Text Content (7 cols) -->
+<div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-herbal-100/90 border border-herbal-200 text-herbal-800 text-xs font-semibold tracking-wide">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="leaf" aria-hidden="true" class="lucide lucide-leaf w-3.5 h-3.5 text-herbal-600"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20"></path><path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13"></path></svg>
+              Formulasi Teruji &amp; Transparan
+            </div>
+<h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#11241C] tracking-tight leading-tight">
+              Pilihan Herbal Alami, <br class="hidden sm:inline">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-herbal-700 via-herbal-600 to-teal-600">Lebih Mudah Dipahami.</span>
+</h1>
+<p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+              Temukan suplemen &amp; ekstrak tanaman obat terpercaya berdasarkan kebutuhan sistem tubuh. Belanja aman tanpa janji berlebihan, lengkap dengan informasi aturan pakai dan izin edar resmi.
+            </p>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+<a class="w-full sm:w-auto px-7 py-3.5 bg-herbal-600 hover:bg-herbal-700 text-white font-semibold text-sm rounded-xl shadow-lg shadow-herbal-600/25 transition duration-200 flex items-center justify-center gap-2 group" href="#katalog">
+<span>Jelajahi Katalog Produk</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+</a>
+<a class="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm rounded-xl border border-slate-200 transition duration-200 flex items-center justify-center gap-2 shadow-xs" href="#kategori">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layers" aria-hidden="true" class="lucide lucide-layers w-4 h-4 text-herbal-600"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
+<span>Cek Berdasarkan Sistem Tubuh</span>
+</a>
+</div>
+<!-- Health Trust Micro-Notice -->
+<div class="pt-3 border-t border-slate-200/80 max-w-xl mx-auto lg:mx-0">
+<p class="text-xs text-slate-500 flex items-center justify-center lg:justify-start gap-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="info" aria-hidden="true" class="lucide lucide-info w-3.5 h-3.5 text-herbal-600 shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                Bukan pengganti diagnosis dokter. Selalu baca anjuran pakai di kemasan.
+              </p>
+</div>
+</div>
+<!-- Hero Graphic Card (5 cols) -->
+<div class="lg:col-span-5 relative">
+<div class="relative mx-auto max-w-md lg:max-w-none">
+<!-- Visual Frame -->
+<div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100 p-3">
+<img alt="Koleksi Herbal Alami dan Rempah Tradisional" class="w-full h-80 sm:h-96 object-cover rounded-2xl" loading="eager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdl0fewoGw6XIp3zpRK-HMwmZnaV11tvqGbneTDXGeZHcbDi5NQNhQ77CrJzISvajHocKo_D893-HMOFabgknxLNBgfte9cmDUbTM34Xm8LSFGQHEiAquXXehzwe7KIwG7WS532opW1H_xcYxOBP4PB64BJKxGlHIzK8R_-OLQ2RQHmHbFvja5m6a-dPUK7fWt8x3lIYSYwUMkFb7mPWCfRbzw7P3mBtUDyN8M4Ro">
+<!-- Floating Info Badge on Card -->
+<div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-white/90 backdrop-blur-md border border-white/40 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 text-herbal-700 flex items-center justify-center">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-5 h-5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-800">100% Bahan Nabati</p>
+<p class="text-[11px] text-slate-500">Bebas Bahan Kimia Obat (BKO)</p>
+</div>
+</div>
+<span class="text-xs font-bold text-herbal-700 bg-herbal-50 px-2.5 py-1 rounded-md border border-herbal-200">
+                    Grade A
+                  </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Badges Bar (Inspired by grocery layout) -->
+<div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 p-4 sm:p-6 bg-white rounded-2xl border border-surface-border shadow-xs">
+<div class="flex items-center gap-3 p-2">
+<div class="w-10 h-10 rounded-full bg-emerald-50 text-herbal-600 flex items-center justify-center shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" class="lucide lucide-shield-check w-5 h-5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+</div>
+<div>
+<h2 class="text-sm font-bold text-slate-800">Terdaftar BPOM</h2>
+<p class="text-xs text-slate-500">Izin edar resmi &amp; terverifikasi</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2">
+<div class="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="package-check" aria-hidden="true" class="lucide lucide-package-check w-5 h-5"><path d="M12 22V12"></path><path d="m16 17 2 2 4-4"></path><path d="M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.32-.753"></path><path d="M3.29 7 12 12l8.71-5"></path><path d="m7.5 4.27 8.997 5.148"></path></svg>
+</div>
+<div>
+<h2 class="text-sm font-bold text-slate-800">Kemas Higienis</h2>
+<p class="text-xs text-slate-500">Segel aluminium &amp; silica gel</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2">
+<div class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="truck" aria-hidden="true" class="lucide lucide-truck w-5 h-5"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg>
+</div>
+<div>
+<h2 class="text-sm font-bold text-slate-800">Pengiriman Cepat</h2>
+<p class="text-xs text-slate-500">Ready stock dikirim di hari sama</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2">
+<div class="w-10 h-10 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clipboard-list" aria-hidden="true" class="lucide lucide-clipboard-list w-5 h-5"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg>
+</div>
+<div>
+<h2 class="text-sm font-bold text-slate-800">Informasi Faktual</h2>
+<p class="text-xs text-slate-500">Panduan aturan &amp; batas minum</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: BodySystemCategories -->
+<section class="py-14 bg-white border-y border-surface-border" id="kategori">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+<div>
+<div class="inline-flex items-center gap-1.5 text-xs font-semibold text-herbal-600 uppercase tracking-wider mb-1">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="activity" aria-hidden="true" class="lucide lucide-activity w-3.5 h-3.5"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path></svg>
+              Taksonomi Sistem Tubuh
+            </div>
+<h2 class="text-2xl sm:text-3xl font-bold text-[#142820]">Jelajahi Berdasarkan Sistem Tubuh</h2>
+<p class="text-sm text-slate-500 mt-1 max-w-xl">
+              Navigasi katalog herbal sesuai fungsi organ. Bukan diagnosis medis melainkan kategori pendukung kebugaran harian.
+            </p>
+</div>
+<div class="mt-4 md:mt-0">
+<button class="text-xs font-semibold text-herbal-700 hover:text-herbal-800 flex items-center gap-1 transition" onclick="filterByCategory('all')">
+              Lihat Semua Kategori <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" aria-hidden="true" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg>
+</button>
+</div>
+</div>
+<!-- 7 Core System Categories Grid (from PRD Section 5) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
+<!-- Category 1: Pencernaan -->
+<button class="category-btn group flex flex-col items-center p-4 rounded-2xl border border-slate-200/80 bg-surface-base hover:bg-herbal-50 hover:border-herbal-300 transition-all text-center focus:outline-none focus:ring-2 focus:ring-herbal-500" data-category-slug="pencernaan" onclick="filterByCategory('pencernaan')" type="button">
+<div class="w-12 h-12 rounded-xl bg-emerald-100/70 text-herbal-700 group-hover:scale-105 flex items-center justify-center transition-transform mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="utensils" aria-hidden="true" class="lucide lucide-utensils w-5 h-5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+</div>
+<span class="font-semibold text-xs text-slate-800 group-hover:text-herbal-800">Pencernaan</span>
+<span class="text-[10px] text-slate-400 mt-0.5">Lambung &amp; Usus</span>
+</button>
+<!-- Category 2: Peredaran Darah -->
+<button class="category-btn group flex flex-col items-center p-4 rounded-2xl border border-slate-200/80 bg-surface-base hover:bg-herbal-50 hover:border-herbal-300 transition-all text-center focus:outline-none focus:ring-2 focus:ring-herbal-500" data-category-slug="darah" onclick="filterByCategory('darah')" type="button">
+<div class="w-12 h-12 rounded-xl bg-rose-100/70 text-rose-600 group-hover:scale-105 flex items-center justify-center transition-transform mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart-pulse" aria-hidden="true" class="lucide lucide-heart-pulse w-5 h-5"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path></svg>
+</div>
+<span class="font-semibold text-xs text-slate-800 group-hover:text-herbal-800">Peredaran Darah</span>
+<span class="text-[10px] text-slate-400 mt-0.5">Jantung &amp; Tensi</span>
+</button>
+<!-- Category 3: Pernapasan -->
+<button class="category-btn group flex flex-col items-center p-4 rounded-2xl border border-slate-200/80 bg-surface-base hover:bg-herbal-50 hover:border-herbal-300 transition-all text-center focus:outline-none focus:ring-2 focus:ring-herbal-500" data-category-slug="pernapasan" onclick="filterByCategory('pernapasan')" type="button">
+<div class="w-12 h-12 rounded-xl bg-cyan-100/70 text-cyan-700 group-hover:scale-105 flex items-center justify-center transition-transform mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="wind" aria-hidden="true" class="lucide lucide-wind w-5 h-5"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"></path><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"></path><path d="M9.8 4.4A2 2 0 1 1 11 8H2"></path></svg>
+</div>
+<span class="font-semibold text-xs text-slate-800 group-hover:text-herbal-800">Pernapasan</span>
+<span class="text-[10px] text-slate-400 mt-0.5">Paru &amp; Tenggorokan</span>
+</button>
+<!-- Category 4: Perkemihan -->
+<button class="category-btn group flex flex-col items-center p-4 rounded-2xl border border-slate-200/80 bg-surface-base hover:bg-herbal-50 hover:border-herbal-300 transition-all text-center focus:outline-none focus:ring-2 focus:ring-herbal-500" data-category-slug="perkemihan" onclick="filterByCategory('perkemihan')" type="button">
+<div class="w-12 h-12 rounded-xl bg-amber-100/70 text-amber-700 group-hover:scale-105 flex items-center justify-center transition-transform mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="droplets" aria-hidden="true" class="lucide lucide-droplets w-5 h-5"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"></path><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"></path></svg>
+</div>
+<span class="font-semibold text-xs text-slate-800 group-hover:text-herbal-800">Perkemihan</span>
+<span class="text-[10px] text-slate-400 mt-0.5">Ginjal &amp; Saluran Kemih</span>
+</button>
+<!-- Category 5: Otak & Saraf -->
+<button class="category-btn group flex flex-col items-center p-4 rounded-2xl border border-slate-200/80 bg-surface-base hover:bg-herbal-50 hover:border-herbal-300 transition-all text-center focus:outline-none focus:ring-2 focus:ring-herbal-500" data-category-slug="otak" onclick="filterByCategory('otak')" type="button">
+<div class="w-12 h-12 rounded-xl bg-indigo-100/70 text-indigo-700 group-hover:scale-105 flex items-center justify-center transition-transform mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-5 h-5"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+</div>
+<span class="font-semibold text-xs text-slate-800 group-hover:text-herbal-800">Otak &amp; Saraf</span>
+<span class="text-[10px] text-slate-400 mt-0.5">Fokus &amp; Kualitas Tidur</span>
+</button>
+<!-- Category 6: Reproduksi -->
+<button class="category-btn group flex flex-col items-center p-4 rounded-2xl border border-slate-200/80 bg-surface-base hover:bg-herbal-50 hover:border-herbal-300 transition-all text-center focus:outline-none focus:ring-2 focus:ring-herbal-500" data-category-slug="reproduksi" onclick="filterByCategory('reproduksi')" type="button">
+<div class="w-12 h-12 rounded-xl bg-purple-100/70 text-purple-700 group-hover:scale-105 flex items-center justify-center transition-transform mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="flower" aria-hidden="true" class="lucide lucide-flower w-5 h-5"><circle cx="12" cy="12" r="3"></circle><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5"></path><path d="M12 7.5V9"></path><path d="M7.5 12H9"></path><path d="M16.5 12H15"></path><path d="M12 16.5V15"></path><path d="m8 8 1.88 1.88"></path><path d="M14.12 9.88 16 8"></path><path d="m8 16 1.88-1.88"></path><path d="M14.12 14.12 16 16"></path></svg>
+</div>
+<span class="font-semibold text-xs text-slate-800 group-hover:text-herbal-800">Reproduksi</span>
+<span class="text-[10px] text-slate-400 mt-0.5">Vitalitas &amp; Hormonal</span>
+</button>
+<!-- Category 7: Lainnya -->
+<button class="category-btn group flex flex-col items-center p-4 rounded-2xl border border-slate-200/80 bg-surface-base hover:bg-herbal-50 hover:border-herbal-300 transition-all text-center focus:outline-none focus:ring-2 focus:ring-herbal-500" data-category-slug="lainnya" onclick="filterByCategory('lainnya')" type="button">
+<div class="w-12 h-12 rounded-xl bg-teal-100/70 text-teal-800 group-hover:scale-105 flex items-center justify-center transition-transform mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield" aria-hidden="true" class="lucide lucide-shield w-5 h-5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
+</div>
+<span class="font-semibold text-xs text-slate-800 group-hover:text-herbal-800">Lainnya</span>
+<span class="text-[10px] text-slate-400 mt-0.5">Imunitas &amp; Sendi</span>
+</button>
+</div>
+</div>
+</section>
+<!-- END: BodySystemCategories -->
+<!-- BEGIN: ProductCatalogSection -->
+<section class="py-14" id="katalog">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Section Header with Interactive Category Pills -->
+<div class="space-y-4 mb-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Katalog Pilihan Herbal</h2>
+<p class="text-sm text-slate-500">Pilih produk terverifikasi dengan komposisi jelas dan batas penggunaan tertera.</p>
+</div>
+<!-- Dynamic Result Info -->
+<div class="text-xs font-medium text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-slate-200" id="catalog-counter-text">
+              Menampilkan <span class="font-bold text-herbal-700" id="displayed-count">8</span> produk
+            </div>
+</div>
+<!-- Category Tab Buttons -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 no-scrollbar text-xs">
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-herbal-700 text-white shadow-xs transition" data-tab="all" onclick="filterByCategory('all')">
+              Semua Produk
+            </button>
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition" data-tab="pencernaan" onclick="filterByCategory('pencernaan')">
+              Pencernaan
+            </button>
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition" data-tab="darah" onclick="filterByCategory('darah')">
+              Peredaran Darah
+            </button>
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition" data-tab="pernapasan" onclick="filterByCategory('pernapasan')">
+              Pernapasan
+            </button>
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition" data-tab="perkemihan" onclick="filterByCategory('perkemihan')">
+              Perkemihan
+            </button>
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition" data-tab="otak" onclick="filterByCategory('otak')">
+              Otak &amp; Saraf
+            </button>
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition" data-tab="reproduksi" onclick="filterByCategory('reproduksi')">
+              Reproduksi
+            </button>
+<button class="tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition" data-tab="lainnya" onclick="filterByCategory('lainnya')">
+              Lainnya / Imunitas
+            </button>
+</div>
+</div>
+<!-- Product Grid (Responsive 2 cols on mobile, 3 on tablet, 4 on desktop) -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6" id="product-grid">
+<!-- Product Card 1 -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between hover:shadow-md hover:border-herbal-200 transition duration-200" data-category="pencernaan" data-name="Kapsul Ekstrak Temulawak Organik" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-herbal-50 text-herbal-700 text-[10px] font-bold px-2 py-0.5 rounded border border-herbal-200">Pencernaan</span>
+<img alt="Kapsul Ekstrak Temulawak Organik" class="object-cover w-full h-full rounded-lg hover:scale-105 transition duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD40sHE1PkN_MJVGNe-TWK-pQMQ2m6CctFjfk8RY8DGkScVPVVUsOzq_6aMUXXThkQrS8Q69itID22XJfe11AzTKk-z0TCLra0xTLHqEOr5djP8HMm0jRgmg3Soxe9HPIvceUf39f7FMXCHCIcCVRQQrAIKmXdD_RpdvRKwFuDy7qVpBkQ445I9e5FixdAM_u4LXwgT8GYTTlLPF_zqjYXn2wmnBGGwnfCSdRQxNwo">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">Isi 60 Kapsul • BPOM TR203348111</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5 hover:text-herbal-700">Kapsul Ekstrak Temulawak Organik</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Membantu menjaga fungsi hati &amp; saluran cerna</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-herbal-700">Rp 78.000</p>
+</div>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stok: 24</span>
+</div>
+<button class="w-full py-2 bg-herbal-600 hover:bg-herbal-700 active:bg-herbal-800 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs" onclick="addToCart(1, 'Kapsul Ekstrak Temulawak Organik', 78000, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&amp;fit=crop&amp;w=500&amp;q=80', '60 Kapsul')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Tambah ke Keranjang
+              </button>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between hover:shadow-md hover:border-herbal-200 transition duration-200" data-category="darah" data-name="Minyak Habbatussauda Habba Oil" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-rose-50 text-rose-700 text-[10px] font-bold px-2 py-0.5 rounded border border-rose-200">Peredaran Darah</span>
+<img alt="Minyak Habbatussauda Habba Oil" class="object-cover w-full h-full rounded-lg hover:scale-105 transition duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLt2wrQSRBq8HLe2kXNntsPiEVQ3wPHRHFC0oVF8vtFvTazf3Anp42fzvLdQXDhsK0cLNeiEeTk2-1vIq-CVFNqL65HCXFePTC4axB2BD6LYWakanes5Vps6QVLKSM6bLAkKPma_w2zfdVBEhLCYT5Pc25VLP7iGeAdwwffTD0aTnf6fDYY6fUe3dlvIVJWs4Uom7DWiXQQPeZ6HJdL4cZLrr1IuFA6INv2R6Fl8M">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">100 Kapsul Lunak • BPOM TR182312001</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5 hover:text-herbal-700">Minyak Habbatussauda Nigella Sativa</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Membantu sirkulasi darah &amp; stamina tubuh</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-herbal-700">Rp 115.000</p>
+</div>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stok: 18</span>
+</div>
+<button class="w-full py-2 bg-herbal-600 hover:bg-herbal-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs" onclick="addToCart(2, 'Minyak Habbatussauda Nigella Sativa', 115000, 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&amp;fit=crop&amp;w=500&amp;q=80', '100 Kapsul')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Tambah ke Keranjang
+              </button>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between hover:shadow-md hover:border-herbal-200 transition duration-200" data-category="pernapasan" data-name="Madu Randu Murni Jahe Merah" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-cyan-50 text-cyan-700 text-[10px] font-bold px-2 py-0.5 rounded border border-cyan-200">Pernapasan</span>
+<img alt="Madu Randu Murni Jahe Merah" class="object-cover w-full h-full rounded-lg hover:scale-105 transition duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5RV3IqTOBgIq4IK1GakkuKIf90_FU9Kxu5xmE8eQr5pkbw4zNehxmH3uindIcvzLV_UbtKLLvGhQnJQAscpxEhFPb2m1Ctty0TUjhgh9JpE9yMjIyvGdYiJoP7XTtJk-ELuoYUJpDWv8aLeUKzaC7wgre9E0Y-_b71cKree3kKFxRyYWHK7rRWI99ZqRt6WiOy1k19NkyqBIHr2lm-h0S-hoX7KHC3rm0o9H89KE">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">Kemasan Botol 350 gr • P-IRT Terdaftar</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5 hover:text-herbal-700">Madu Randu Ekstrak Jahe Merah</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Melegakan tenggorokan &amp; menghangatkan dada</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-herbal-700">Rp 89.000</p>
+</div>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stok: 40</span>
+</div>
+<button class="w-full py-2 bg-herbal-600 hover:bg-herbal-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs" onclick="addToCart(3, 'Madu Randu Ekstrak Jahe Merah', 89000, 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&amp;fit=crop&amp;w=500&amp;q=80', '350 gr')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Tambah ke Keranjang
+              </button>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between hover:shadow-md hover:border-herbal-200 transition duration-200" data-category="otak" data-name="Teh Daun Pegagan Centella Asiatica" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded border border-indigo-200">Otak &amp; Saraf</span>
+<img alt="Teh Daun Pegagan Centella Asiatica" class="object-cover w-full h-full rounded-lg hover:scale-105 transition duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWb23mMkb5AX0SR13t2G9z_FiBkF7YVkaOeFN698STIgIXCBc4us46EFvrAKjDqF1SrMQgEGrx6PyeHHjw9jQmZmD7oQGBEJ5LqwzsTAVMoTrrgI8miQpgR3KdGQeYihUYmDSZBxTB10y6SkF4lc_FEb3tjcKAwv4_zJZpNQhrQIv90rF9xpPvQO8dacktbNPxWwWbGAjMEJxn1f08qRZWTxVqiiN_K-SaXK4kYxY">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">Kotak 25 Kantong Teh • P-IRT</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5 hover:text-herbal-700">Teh Daun Pegagan (Centella)</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Membantu konsentrasi &amp; relaksasi alami</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-herbal-700">Rp 45.000</p>
+</div>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stok: 12</span>
+</div>
+<button class="w-full py-2 bg-herbal-600 hover:bg-herbal-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs" onclick="addToCart(4, 'Teh Daun Pegagan (Centella)', 45000, 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&amp;fit=crop&amp;w=500&amp;q=80', '25 Kantong')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Tambah ke Keranjang
+              </button>
+</div>
+</article>
+<!-- Product Card 5 (Out of Stock State - FR-06 PRD) -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between opacity-80 hover:opacity-100 transition duration-200" data-category="perkemihan" data-name="Ekstrak Daun Kumis Kucing Murni" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-amber-50 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-200">Perkemihan</span>
+<span class="absolute inset-0 bg-slate-900/40 backdrop-blur-[1px] flex items-center justify-center text-white text-xs font-bold uppercase tracking-wider">
+                  Stok Habis
+                </span>
+<img alt="Ekstrak Kumis Kucing" class="object-cover w-full h-full rounded-lg grayscale" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh8chF5jRML3vj0E8dSavtIY62wA-yAf_LcuZ4TEnw3OBoMu3iJy1P4dmOGeDgL3S6aZZtItgvssbMsZmJ5grkLp0eBuvyHIHtKOIQMgFmUwkzf73kOynS6g59N-jZD8aNh0W00vT2myuqBAVeyW28fIhMZDc5NvdeOpcGFPPfjvTntUf0RwQ3sLaBGTBCeROZWWDNETGxgxD7_uy-P_93tdr8UTECnkYXVH8cjfM">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">60 Kapsul • BPOM TR192329881</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5">Ekstrak Kumis Kucing Folium</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Membantu melancarkan buang air kecil</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-slate-400">Rp 65.000</p>
+</div>
+<span class="text-[11px] font-semibold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">Habis</span>
+</div>
+<!-- Disabled button conforming to PRD criteria -->
+<button class="w-full py-2 bg-slate-200 text-slate-400 cursor-not-allowed text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5" disabled="" title="Produk sedang dalam proses restock">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="slash" aria-hidden="true" class="lucide lucide-slash w-3.5 h-3.5"><path d="M22 2 2 22"></path></svg> Stok Tidak Tersedia
+              </button>
+</div>
+</article>
+<!-- Product Card 6 -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between hover:shadow-md hover:border-herbal-200 transition duration-200" data-category="pencernaan" data-name="Kunyit Asam Serbuk Instan Alami" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-herbal-50 text-herbal-700 text-[10px] font-bold px-2 py-0.5 rounded border border-herbal-200">Pencernaan</span>
+<img alt="Kunyit Asam Instan" class="object-cover w-full h-full rounded-lg hover:scale-105 transition duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd4ZMjjMmXqnfpm7D09BVuLX8SpC2lBE2jDmBNy0chJiJCAo0qcPN_np45pO_QSR04h9q-VNcdFeYmQFISpsSXsA4M_j0cGETYpN1920ZB1cJ9gReFfFlJlf0EQykmb_p8KTKKm2mL8RhDoMBxfTsETmjLuWrmxSa75kuGJdW95wVQ7GqhKFllJ2V8Mix-q7mkhesx8rXNr0YvIWoI_3N5guoqqnfo-PBe8yZqw3w">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">Isi 10 Sachet @20gr • P-IRT</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5 hover:text-herbal-700">Kunyit Asam Herbal Organik</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Meringankan rasa kembung &amp; nyaman di perut</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-herbal-700">Rp 35.000</p>
+</div>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stok: 50</span>
+</div>
+<button class="w-full py-2 bg-herbal-600 hover:bg-herbal-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs" onclick="addToCart(6, 'Kunyit Asam Herbal Organik', 35000, 'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&amp;fit=crop&amp;w=500&amp;q=80', '10 Sachet')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Tambah ke Keranjang
+              </button>
+</div>
+</article>
+<!-- Product Card 7 -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between hover:shadow-md hover:border-herbal-200 transition duration-200" data-category="reproduksi" data-name="Ekstrak Purwoceng &amp; Pasak Bumi" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-purple-50 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded border border-purple-200">Reproduksi</span>
+<img alt="Ekstrak Purwoceng" class="object-cover w-full h-full rounded-lg hover:scale-105 transition duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKXlIuNtWtDk07ZKSvq8fnHQn1fUeHobKF157IMzXF_-h1IGPu9WLtUXekncNpZD61I0uK6Qpn4xxhnQf9llNPzqH02VkRFj2QC86zVgxSTGKjO_1VXTcdbB767c-r_HcSpvNWHBNy7YaY9qwptE1JJdsdRQ8ndSOkaTry1gMAAmOQxeR9O2sz2t9yAT71q7cHnZbwRK7wnOMxt-DB6IR3vcfeGZWND8ByRlJvLpc">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">50 Kapsul • BPOM TR173305411</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5 hover:text-herbal-700">Kapsul Akar Purwoceng Pilihan</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Menunjang stamina pria dewasa secara alami</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-herbal-700">Rp 95.000</p>
+</div>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stok: 15</span>
+</div>
+<button class="w-full py-2 bg-herbal-600 hover:bg-herbal-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs" onclick="addToCart(7, 'Kapsul Akar Purwoceng Pilihan', 95000, 'https://images.unsplash.com/photo-1577937927133-66ef06acdf18?auto=format&amp;fit=crop&amp;w=500&amp;q=80', '50 Kapsul')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Tambah ke Keranjang
+              </button>
+</div>
+</article>
+<!-- Product Card 8 -->
+<article class="product-item bg-white rounded-2xl border border-surface-border p-4 flex flex-col justify-between hover:shadow-md hover:border-herbal-200 transition duration-200" data-category="lainnya" data-name="Ekstrak Daun Kelor Moringa Oleifera" data-purpose="product-card">
+<div>
+<div class="relative bg-slate-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-2">
+<span class="absolute top-2 left-2 bg-teal-50 text-teal-700 text-[10px] font-bold px-2 py-0.5 rounded border border-teal-200">Lainnya</span>
+<img alt="Ekstrak Daun Kelor" class="object-cover w-full h-full rounded-lg hover:scale-105 transition duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxQNIT7YIwRACKGyPRYb6uMklMLh4MVEanf4fL25OR9lYdKOj_jEUkHekkEV4jqYFkvvkMYBvAVwjRhRJE8V9gPQtH1YNIfvp5WTTU3fqf065JvAPM1ikzIZ0-IvH0AwAyWYwK6oG0rGqaommYdjWLLH9LHgn2v-XvlKIfV5b3-w3hopOwSM1Y356Pflz1pB_QnTm1d_0VoljRDLzdXdGIiEmJUKK88HSgVnMEO_E">
+</div>
+<p class="text-[11px] text-slate-400 font-medium">60 Kapsul • BPOM TR193333831</p>
+<h3 class="text-sm font-bold text-slate-800 line-clamp-2 mt-0.5 hover:text-herbal-700">Moringa Oleifera (Daun Kelor)</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">Antioksidan tinggi &amp; pemelihara daya tahan</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100">
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="text-xs text-slate-400">Harga:</span>
+<p class="text-base font-bold text-herbal-700">Rp 52.000</p>
+</div>
+<span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stok: 30</span>
+</div>
+<button class="w-full py-2 bg-herbal-600 hover:bg-herbal-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs" onclick="addToCart(8, 'Moringa Oleifera (Daun Kelor)', 52000, 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&amp;fit=crop&amp;w=500&amp;q=80', '60 Kapsul')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Tambah ke Keranjang
+              </button>
+</div>
+</article>
+</div>
+<!-- Empty State Container -->
+<div class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-dashed border-slate-300 mt-6" id="catalog-empty-state">
+<div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400 mb-4">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search-x" aria-hidden="true" class="lucide lucide-search-x w-8 h-8"><path d="m13.5 8.5-5 5"></path><path d="m8.5 8.5 5 5"></path><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+</div>
+<h3 class="text-base font-bold text-slate-800">Tidak ada produk yang cocok</h3>
+<p class="text-sm text-slate-500 max-w-sm mx-auto mt-1">
+            Produk tidak ditemukan untuk kata kunci atau kategori yang Anda pilih. Coba atur ulang filter pencarian Anda.
+          </p>
+<button class="mt-4 px-4 py-2 bg-herbal-600 hover:bg-herbal-700 text-white text-xs font-semibold rounded-lg transition" onclick="resetFilters()">
+            Reset Semua Filter
+          </button>
+</div>
+</div>
+</section>
+<!-- END: ProductCatalogSection -->
+<!-- BEGIN: PromoAndTrustBanners (Referencing FreshMart layout) -->
+<section class="py-12 bg-surface-base border-t border-surface-border" id="promo">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Promo Card 1 -->
+<div class="bg-gradient-to-br from-emerald-800 to-teal-900 rounded-2xl p-6 text-white flex flex-col justify-between relative overflow-hidden shadow-sm">
+<div class="relative z-10">
+<span class="inline-block px-2.5 py-1 rounded bg-white/20 text-white text-[11px] font-semibold mb-3">Pengguna Baru</span>
+<h3 class="text-xl font-bold leading-tight">Diskon 10% Belanja Pertama Anda</h3>
+<p class="text-xs text-emerald-100 mt-2">Daftar checkout instan tanpa registrasi ribet. Masukkan kode: <span class="font-mono bg-white/25 px-1 py-0.5 rounded font-bold">HERBALAWAL</span></p>
+</div>
+<div class="mt-6 flex items-center justify-between relative z-10">
+<span class="text-xs font-medium text-emerald-200">Min. Belanja Rp 100rb</span>
+<div class="w-8 h-8 rounded-full bg-white text-herbal-800 flex items-center justify-center">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+</div>
+</div>
+</div>
+<!-- Promo Card 2 -->
+<div class="bg-gradient-to-br from-[#854D0E] to-[#A16207] rounded-2xl p-6 text-white flex flex-col justify-between relative overflow-hidden shadow-sm">
+<div class="relative z-10">
+<span class="inline-block px-2.5 py-1 rounded bg-white/20 text-white text-[11px] font-semibold mb-3">Bebas Ongkir</span>
+<h3 class="text-xl font-bold leading-tight">Gratis Pengiriman Seluruh Jawa-Bali</h3>
+<p class="text-xs text-amber-100 mt-2">Pesanan dipacking aman dengan bubble wrap ganda dan kardus tebal bersegel.</p>
+</div>
+<div class="mt-6 flex items-center justify-between relative z-10">
+<span class="text-xs font-medium text-amber-200">Otomatis saat checkout</span>
+<div class="w-8 h-8 rounded-full bg-white text-[#854D0E] flex items-center justify-center">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="truck" aria-hidden="true" class="lucide lucide-truck w-4 h-4"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg>
+</div>
+</div>
+</div>
+<!-- Promo Card 3 -->
+<div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 text-white flex flex-col justify-between relative overflow-hidden shadow-sm">
+<div class="relative z-10">
+<span class="inline-block px-2.5 py-1 rounded bg-herbal-500 text-white text-[11px] font-semibold mb-3">Panduan &amp; Edukasi</span>
+<h3 class="text-xl font-bold leading-tight">Belanja Jelas Tanpa Janji Bombastis</h3>
+<p class="text-xs text-slate-300 mt-2">Setiap produk memiliki deskripsi bahan asli, aturan minum harian, serta peringatan interaksi.</p>
+</div>
+<div class="mt-6 flex items-center justify-between relative z-10">
+<span class="text-xs font-medium text-slate-400">Transparan &amp; Faktual</span>
+<div class="w-8 h-8 rounded-full bg-white text-slate-900 flex items-center justify-center">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-4 h-4"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: PromoAndTrustBanners -->
+<!-- BEGIN: HealthDisclaimerSection (PRD Section 9 & 12) -->
+<section class="py-12 bg-white border-t border-surface-border" id="edukasi">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="p-6 md:p-8 rounded-3xl bg-slate-50 border border-slate-200/90 flex flex-col md:flex-row gap-6 items-start">
+<div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-circle" aria-hidden="true" class="lucide lucide-alert-circle w-6 h-6"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+</div>
+<div class="space-y-2">
+<h3 class="text-base font-bold text-slate-900">Perhatian &amp; Tanggung Jawab Penggunaan Herbal</h3>
+<p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+              Seluruh suplemen dan ramuan herbal di HerbalStore dirancang untuk mendukung kesehatan dan kebugaran tubuh, <strong>bukan sebagai pengganti resep obat, diagnosis dokter, atau perawatan medis komprehensif</strong>. 
+            </p>
+<p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+              Jika Anda sedang dalam kondisi hamil, menyusui, memiliki penyakit kronis (seperti gagal ginjal atau komplikasi jantung), atau sedang mengonsumsi obat pengencer darah rutin, <strong>wajib berkonsultasi terlebih dahulu dengan tenaga kesehatan atau dokter keluarga Anda</strong> sebelum memulai konsumsi rutin.
+            </p>
+<div class="pt-2 flex flex-wrap gap-4 text-xs font-medium text-herbal-700">
+<span class="inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5"><path d="M20 6 9 17l-5-5"></path></svg> Sesuai Regulasi BPOM RI</span>
+<span class="inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5"><path d="M20 6 9 17l-5-5"></path></svg> Komposisi Tertera Lengkap</span>
+<span class="inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5"><path d="M20 6 9 17l-5-5"></path></svg> Batch Number &amp; Expire Date Jelas</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HealthDisclaimerSection -->
+</main>
+<!-- BEGIN: InteractiveCartDrawer (FR-08, FR-09, FR-10) -->
+<div class="fixed inset-0 z-50 overflow-hidden transition-all duration-300" id="cart-drawer">
+<!-- Backdrop overlay -->
+<div class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity duration-300 opacity-100" id="cart-backdrop" onclick="toggleCartDrawer(false)"></div>
+<div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-none">
+<div class="w-screen max-w-md bg-white shadow-2xl pointer-events-auto transform cart-drawer-transition flex flex-col" id="cart-panel">
+<!-- Cart Drawer Header -->
+<div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+<div class="flex items-center gap-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag w-5 h-5 text-herbal-600"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>
+<h2 class="text-base font-bold text-slate-800">Keranjang Belanja</h2>
+<span class="text-xs bg-herbal-100 text-herbal-800 font-bold px-2 py-0.5 rounded-full" id="cart-drawer-count">3</span>
+</div>
+<button aria-label="Tutup keranjang" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-200/50 transition" onclick="toggleCartDrawer(false)">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+</button>
+</div>
+<!-- Cart Items List Container -->
+<div class="flex-1 overflow-y-auto p-6 space-y-4" id="cart-items-container"><div class="flex items-center justify-between pb-3 border-b border-slate-100"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span><span class="text-xs font-semibold text-slate-700">Gratis Ongkir Aktif (Min. Rp 150.000)</span></div><span class="text-[11px] font-bold text-herbal-700 bg-herbal-50 px-2 py-0.5 rounded border border-herbal-200">Tercapai</span></div><div class="space-y-3"><div class="flex gap-3 p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs items-center"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD40sHE1PkN_MJVGNe-TWK-pQMQ2m6CctFjfk8RY8DGkScVPVVUsOzq_6aMUXXThkQrS8Q69itID22XJfe11AzTKk-z0TCLra0xTLHqEOr5djP8HMm0jRgmg3Soxe9HPIvceUf39f7FMXCHCIcCVRQQrAIKmXdD_RpdvRKwFuDy7qVpBkQ445I9e5FixdAM_u4LXwgT8GYTTlLPF_zqjYXn2wmnBGGwnfCSdRQxNwo" alt="Kapsul Temulawak" class="w-14 h-14 object-cover rounded-lg bg-slate-50 shrink-0"><div class="flex-1 min-w-0"><div class="flex justify-between items-start"><h4 class="text-xs font-bold text-slate-800 truncate">Kapsul Ekstrak Temulawak Organik</h4><button class="text-slate-400 hover:text-rose-500 p-0.5" onclick="removeFromCart(1)"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div><p class="text-[10px] text-slate-400 mt-0.5">60 Kapsul • BPOM TR203348111</p><div class="flex items-center justify-between mt-2"><p class="text-xs font-bold text-herbal-700">Rp 78.000</p><div class="flex items-center border border-slate-200 rounded-lg bg-slate-50"><button onclick="updateQty(1, -1)" class="px-2 py-0.5 text-xs font-bold text-slate-600 hover:bg-slate-200/50 rounded-l">−</button><span class="px-2.5 text-xs font-semibold text-slate-800 bg-white">1</span><button onclick="updateQty(1, 1)" class="px-2 py-0.5 text-xs font-bold text-slate-600 hover:bg-slate-200/50 rounded-r">+</button></div></div></div></div><div class="flex gap-3 p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs items-center"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLt2wrQSRBq8HLe2kXNntsPiEVQ3wPHRHFC0oVF8vtFvTazf3Anp42fzvLdQXDhsK0cLNeiEeTk2-1vIq-CVFNqL65HCXFePTC4axB2BD6LYWakanes5Vps6QVLKSM6bLAkKPma_w2zfdVBEhLCYT5Pc25VLP7iGeAdwwffTD0aTnf6fDYY6fUe3dlvIVJWs4Uom7DWiXQQPeZ6HJdL4cZLrr1IuFA6INv2R6Fl8M" alt="Minyak Habbatussauda" class="w-14 h-14 object-cover rounded-lg bg-slate-50 shrink-0"><div class="flex-1 min-w-0"><div class="flex justify-between items-start"><h4 class="text-xs font-bold text-slate-800 truncate">Minyak Habbatussauda Nigella Sativa</h4><button class="text-slate-400 hover:text-rose-500 p-0.5" onclick="removeFromCart(2)"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div><p class="text-[10px] text-slate-400 mt-0.5">100 Kapsul • BPOM TR182312001</p><div class="flex items-center justify-between mt-2"><p class="text-xs font-bold text-herbal-700">Rp 115.000</p><div class="flex items-center border border-slate-200 rounded-lg bg-slate-50"><button onclick="updateQty(2, -1)" class="px-2 py-0.5 text-xs font-bold text-slate-600 hover:bg-slate-200/50 rounded-l">−</button><span class="px-2.5 text-xs font-semibold text-slate-800 bg-white">1</span><button onclick="updateQty(2, 1)" class="px-2 py-0.5 text-xs font-bold text-slate-600 hover:bg-slate-200/50 rounded-r">+</button></div></div></div></div><div class="flex gap-3 p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs items-center"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5RV3IqTOBgIq4IK1GakkuKIf90_FU9Kxu5xmE8eQr5pkbw4zNehxmH3uindIcvzLV_UbtKLLvGhQnJQAscpxEhFPb2m1Ctty0TUjhgh9JpE9yMjIyvGdYiJoP7XTtJk-ELuoYUJpDWv8aLeUKzaC7wgre9E0Y-_b71cKree3kKFxRyYWHK7rRWI99ZqRt6WiOy1k19NkyqBIHr2lm-h0S-hoX7KHC3rm0o9H89KE" alt="Madu Randu Jahe Merah" class="w-14 h-14 object-cover rounded-lg bg-slate-50 shrink-0"><div class="flex-1 min-w-0"><div class="flex justify-between items-start"><h4 class="text-xs font-bold text-slate-800 truncate">Madu Randu Ekstrak Jahe Merah</h4><button class="text-slate-400 hover:text-rose-500 p-0.5" onclick="removeFromCart(3)"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div><p class="text-[10px] text-slate-400 mt-0.5">Kemasan 350 gr • P-IRT</p><div class="flex items-center justify-between mt-2"><p class="text-xs font-bold text-herbal-700">Rp 89.000</p><div class="flex items-center border border-slate-200 rounded-lg bg-slate-50"><button onclick="updateQty(3, -1)" class="px-2 py-0.5 text-xs font-bold text-slate-600 hover:bg-slate-200/50 rounded-l">−</button><span class="px-2.5 text-xs font-semibold text-slate-800 bg-white">1</span><button onclick="updateQty(3, 1)" class="px-2 py-0.5 text-xs font-bold text-slate-600 hover:bg-slate-200/50 rounded-r">+</button></div></div></div></div></div><div class="p-3 bg-herbal-50 rounded-xl border border-herbal-200/80 flex items-start gap-2.5"><i data-lucide="shield-check" class="w-4 h-4 text-herbal-600 mt-0.5 shrink-0"></i><div class="text-[11px] text-herbal-800 leading-relaxed"><span class="font-bold">Jaminan Mutu Herbal:</span> Seluruh produk dikemas dengan segel ganda &amp; lolos uji registrasi resmi.</div></div></div>
+<!-- Cart Summary & Checkout Footer -->
+<div class="p-6 border-t border-slate-100 bg-slate-50/80 space-y-3">
+<div class="space-y-1.5 text-xs text-slate-600">
+<div class="flex justify-between">
+<span>Subtotal Produk</span>
+<span class="font-bold text-slate-900" id="cart-subtotal">Rp 282.000</span>
+</div>
+<div class="flex justify-between">
+<span>Estimasi Ongkir (Jawa-Bali)</span>
+<span class="text-emerald-600 font-semibold" id="cart-shipping">Gratis</span>
+</div>
+<div class="flex justify-between text-sm font-bold text-slate-900 pt-2 border-t border-slate-200">
+<span>Total Pembayaran</span>
+<span class="text-herbal-700 font-extrabold text-base" id="cart-total">Rp 282.000</span>
+</div>
+</div>
+<!-- Checkout Trigger Button (US-06 Guest Checkout) -->
+<button class="w-full py-3.5 bg-herbal-600 hover:bg-herbal-700 active:bg-herbal-800 text-white font-semibold text-sm rounded-xl shadow-md shadow-herbal-600/20 transition flex items-center justify-center gap-2" onclick="openCheckoutModal()">
+<span>Lanjut ke Checkout</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+</button>
+<p class="text-[11px] text-center text-slate-400">
+            Transaksi aman &amp; terenkripsi. Guest checkout tanpa perlu login.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- END: InteractiveCartDrawer -->
+<!-- BEGIN: ThreeStepCheckoutModal (FR-10, US-06 PRD) -->
+<div class="fixed inset-0 z-50 overflow-y-auto hidden" id="checkout-modal"><div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0"><div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onclick="closeCheckoutModal()"></div><div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full border border-slate-200"><div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center"><div><div class="flex items-center gap-2"><h3 class="text-base font-bold text-slate-900">Guest Checkout HerbalStore</h3><span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-herbal-800 rounded-full">Tanpa Akun</span></div><p class="text-xs text-slate-500 mt-0.5">Belanja herbal aman, cepat, dan transparan.</p></div><button class="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-200/50" onclick="closeCheckoutModal()"><i class="w-5 h-5" data-lucide="x"></i></button></div><div class="px-6 pt-4 pb-2 border-b border-slate-100 bg-white"><div class="grid grid-cols-3 gap-2 text-center text-xs font-semibold"><div class="p-2 rounded-lg bg-herbal-50 text-herbal-700 border border-herbal-200"><span class="block text-[10px] uppercase font-bold text-herbal-600">Tahap 1</span>Data Penerima</div><div class="p-2 rounded-lg bg-herbal-50 text-herbal-700 border border-herbal-200"><span class="block text-[10px] uppercase font-bold text-herbal-600">Tahap 2</span>Opsi Kirim</div><div class="p-2 rounded-lg bg-herbal-700 text-white shadow-xs"><span class="block text-[10px] uppercase font-bold text-emerald-200">Tahap 3</span>Bayar &amp; Resi</div></div></div><form class="p-6 space-y-4" id="checkout-form" onsubmit="handleCheckoutSubmit(event)"><div class="space-y-3"><h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-herbal-600"></i> 1. Informasi Penerima &amp; Alamat</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div><label class="block text-xs font-semibold text-slate-700 mb-1" for="cust-name">Nama Lengkap *</label><input class="w-full text-xs rounded-lg border-slate-300 focus:border-herbal-600 focus:ring-herbal-600" id="cust-name" value="Siti Rahmayanti" required="" type="text"></div><div><label class="block text-xs font-semibold text-slate-700 mb-1" for="cust-phone">Nomor WhatsApp *</label><input class="w-full text-xs rounded-lg border-slate-300 focus:border-herbal-600 focus:ring-herbal-600" id="cust-phone" value="0812-8821-4902" required="" type="tel"></div></div><div><label class="block text-xs font-semibold text-slate-700 mb-1" for="cust-address">Alamat Lengkap Pengiriman *</label><textarea class="w-full text-xs rounded-lg border-slate-300 focus:border-herbal-600 focus:ring-herbal-600" id="cust-address" required="" rows="2">Jl. Margonda Raya No. 45B, Kemiri Muka, Beji, Kota Depok, Jawa Barat 16423</textarea></div></div><div class="space-y-3 pt-2 border-t border-slate-100"><h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i data-lucide="truck" class="w-3.5 h-3.5 text-herbal-600"></i> 2. Ekspedisi &amp; Pembayaran</h4><div class="grid grid-cols-2 gap-2 text-xs"><label class="flex items-center justify-between p-2.5 rounded-lg border border-herbal-600 bg-herbal-50/60 cursor-pointer"><div class="flex items-center gap-2"><input checked="" class="text-herbal-600 focus:ring-herbal-500" name="shipping_service" type="radio" value="regular"><span class="font-medium text-slate-800">Reguler Higienis</span></div><span class="text-[11px] font-bold text-emerald-600">Gratis</span></label><label class="flex items-center justify-between p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer"><div class="flex items-center gap-2"><input class="text-herbal-600 focus:ring-herbal-500" name="shipping_service" type="radio" value="express"><span class="font-medium text-slate-800">Express 1 Hari</span></div><span class="text-[11px] font-semibold text-slate-600">+Rp 15.000</span></label></div><div class="grid grid-cols-2 gap-2 text-xs"><label class="flex items-center gap-2 p-2.5 rounded-lg border border-herbal-600 bg-herbal-50/50 cursor-pointer"><input checked="" class="text-herbal-600 focus:ring-herbal-500" name="payment_method" type="radio" value="qris"><span class="font-medium text-slate-800">QRIS Instant (Bebas Biaya)</span></label><label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer"><input class="text-herbal-600 focus:ring-herbal-500" name="payment_method" type="radio" value="transfer"><span class="font-medium text-slate-800">Virtual Account (BCA/Mandiri)</span></label></div></div><div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1.5"><div class="flex justify-between text-slate-500"><span>Subtotal Produk (3 item)</span><span class="font-medium text-slate-800">Rp 282.000</span></div><div class="flex justify-between text-slate-500"><span>Ongkos Kirim Promo</span><span class="font-semibold text-emerald-600">Gratis (Hemat Rp 18.000)</span></div><div class="flex justify-between font-bold text-slate-900 pt-1.5 border-t border-slate-200 text-sm"><span>Total Pembayaran Akhir</span><span class="text-herbal-700 font-extrabold" id="checkout-summary-total">Rp 282.000</span></div></div><div class="pt-2 flex items-center justify-end gap-3"><button class="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition" onclick="closeCheckoutModal()" type="button">Kembali ke Keranjang</button><button class="px-6 py-2.5 text-xs font-semibold text-white bg-herbal-600 hover:bg-herbal-700 rounded-lg shadow-sm transition flex items-center gap-2" type="submit"><span>Bayar &amp; Terbitkan Resi</span><i class="w-4 h-4" data-lucide="arrow-right"></i></button></div></form></div></div></div>
+<!-- END: ThreeStepCheckoutModal -->
+<!-- BEGIN: OrderSuccessModal -->
+<div class="fixed inset-0 z-50 overflow-y-auto" id="order-success-modal"><div class="flex items-center justify-center min-h-screen px-4 py-8 text-center sm:p-6"><div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onclick="closeSuccessModal()"></div><div class="inline-block bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all w-full max-w-2xl relative z-10 border border-slate-200/90 my-6"><div class="p-6 sm:p-8 bg-gradient-to-b from-emerald-50/70 via-white to-white border-b border-slate-100"><div class="flex items-start justify-between"><div class="flex items-center gap-4"><div class="w-14 h-14 rounded-2xl bg-emerald-100 text-herbal-700 flex items-center justify-center shrink-0 shadow-xs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2 w-8 h-8 text-herbal-600"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg></div><div><div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100/90 text-herbal-800 text-[10px] font-bold tracking-wide uppercase mb-1">Konfirmasi Pesanan</div><h2 class="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">Pesanan Berhasil Dibuat!</h2><p class="text-xs text-slate-500 mt-1 max-w-md">Terima kasih atas pesanan Anda. Kami telah mencatat pesanan Anda dan mengirimkan rincian via WhatsApp.</p></div></div><button aria-label="Tutup modal" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition" onclick="closeSuccessModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-wrap items-center justify-between gap-3"><div class="space-y-0.5"><span class="text-[11px] font-medium text-slate-400 block">Nomor Pesanan Unik</span><span class="font-mono text-sm sm:text-base font-bold text-slate-800">#HBS-20261118-8492</span></div><div class="space-y-0.5 text-left sm:text-center"><span class="text-[11px] font-medium text-slate-400 block">Waktu Pemesanan</span><span class="text-xs font-semibold text-slate-700">18 Nov 2026, 14:32 WIB</span></div><div class="space-y-0.5 text-left sm:text-right"><span class="text-[11px] font-medium text-slate-400 block">Status Pesanan</span><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">Menunggu Pembayaran</span></div></div></div><div class="p-6 sm:p-8 space-y-6 max-h-[68vh] overflow-y-auto"><div class="p-5 rounded-2xl bg-herbal-50/60 border border-herbal-200/80"><div class="flex items-center justify-between pb-3 border-b border-herbal-200/60"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-herbal-600 text-white flex items-center justify-center font-bold text-xs">QR</div><div><h3 class="text-xs font-bold text-slate-800">Instruksi Pembayaran Instan (QRIS &amp; VA)</h3><p class="text-[11px] text-slate-500">Dapat dipindai oleh semua aplikasi m-Banking dan e-Wallet</p></div></div><span class="text-[11px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">Batas: 23 jam 59 menit</span></div><div class="grid grid-cols-1 sm:grid-cols-12 gap-4 mt-4 items-center"><div class="sm:col-span-5 flex flex-col items-center justify-center bg-white p-3 rounded-xl border border-slate-200 shadow-xs"><div class="w-32 h-32 bg-slate-100 rounded-lg border-2 border-dashed border-slate-300 flex flex-col items-center justify-center text-center p-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-slash w-8 h-8 text-herbal-600 mb-1"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg><span class="text-[9px] font-mono font-bold text-slate-600">SCAN QRIS RESMI</span><span class="text-[8px] text-slate-400 mt-0.5">NMID: ID1020261198</span></div><span class="text-[10px] text-slate-400 mt-2 font-medium">BCA, Mandiri, BRI, GoPay, OVO, ShopeePay</span></div><div class="sm:col-span-7 space-y-3"><div class="p-3 bg-white rounded-xl border border-slate-200/80"><span class="text-[10px] text-slate-400 font-medium block">Nomor Virtual Account BCA</span><div class="flex items-center justify-between mt-0.5"><span class="font-mono text-sm font-bold text-slate-800 tracking-wider">8271 0812 3456 7890</span><button class="text-[10px] font-bold text-herbal-700 hover:text-herbal-800 bg-herbal-50 px-2 py-1 rounded border border-herbal-200 transition" onclick="navigator.clipboard.writeText('8271081234567890'); alert('Nomor VA disalin!')" type="button">Salin VA</button></div></div><div class="p-3 bg-white rounded-xl border border-slate-200/80"><span class="text-[10px] text-slate-400 font-medium block">Total Tagihan Tepat (Jangan Dibulatkan)</span><div class="flex items-center justify-between mt-0.5"><span class="text-base font-extrabold text-herbal-700">Rp 282.000</span><button class="text-[10px] font-bold text-herbal-700 hover:text-herbal-800 bg-herbal-50 px-2 py-1 rounded border border-herbal-200 transition" onclick="navigator.clipboard.writeText('282000'); alert('Nomor nominal disalin!')" type="button">Salin Nominal</button></div></div></div></div></div><div class="space-y-3"><h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag w-3.5 h-3.5 text-herbal-600"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg> Ringkasan Item Pesanan</h3><div class="bg-white rounded-2xl border border-slate-200/90 divide-y divide-slate-100 p-2"><div class="flex items-center justify-between p-2.5"><div class="flex items-center gap-3"><img alt="Temulawak" class="w-10 h-10 rounded-lg object-cover bg-slate-50 border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD40sHE1PkN_MJVGNe-TWK-pQMQ2m6CctFjfk8RY8DGkScVPVVUsOzq_6aMUXXThkQrS8Q69itID22XJfe11AzTKk-z0TCLra0xTLHqEOr5djP8HMm0jRgmg3Soxe9HPIvceUf39f7FMXCHCIcCVRQQrAIKmXdD_RpdvRKwFuDy7qVpBkQ445I9e5FixdAM_u4LXwgT8GYTTlLPF_zqjYXn2wmnBGGwnfCSdRQxNwo"><div><h4 class="text-xs font-bold text-slate-800">Kapsul Ekstrak Temulawak Organik</h4><p class="text-[10px] text-slate-400">Isi 60 Kapsul • 1x</p></div></div><span class="text-xs font-bold text-slate-800">Rp 78.000</span></div><div class="flex items-center justify-between p-2.5"><div class="flex items-center gap-3"><img alt="Habbatussauda" class="w-10 h-10 rounded-lg object-cover bg-slate-50 border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLt2wrQSRBq8HLe2kXNntsPiEVQ3wPHRHFC0oVF8vtFvTazf3Anp42fzvLdQXDhsK0cLNeiEeTk2-1vIq-CVFNqL65HCXFePTC4axB2BD6LYWakanes5Vps6QVLKSM6bLAkKPma_w2zfdVBEhLCYT5Pc25VLP7iGeAdwwffTD0aTnf6fDYY6fUe3dlvIVJWs4Uom7DWiXQQPeZ6HJdL4cZLrr1IuFA6INv2R6Fl8M"><div><h4 class="text-xs font-bold text-slate-800">Minyak Habbatussauda Nigella Sativa</h4><p class="text-[10px] text-slate-400">100 Kapsul Lunak • 1x</p></div></div><span class="text-xs font-bold text-slate-800">Rp 115.000</span></div><div class="flex items-center justify-between p-2.5"><div class="flex items-center gap-3"><img alt="Madu Randu" class="w-10 h-10 rounded-lg object-cover bg-slate-50 border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5RV3IqTOBgIq4IK1GakkuKIf90_FU9Kxu5xmE8eQr5pkbw4zNehxmH3uindIcvzLV_UbtKLLvGhQnJQAscpxEhFPb2m1Ctty0TUjhgh9JpE9yMjIyvGdYiJoP7XTtJk-ELuoYUJpDWv8aLeUKzaC7wgre9E0Y-_b71cKree3kKFxRyYWHK7rRWI99ZqRt6WiOy1k19NkyqBIHr2lm-h0S-hoX7KHC3rm0o9H89KE"><div><h4 class="text-xs font-bold text-slate-800">Madu Randu Ekstrak Jahe Merah</h4><p class="text-[10px] text-slate-400">Kemasan Botol 350 gr • 1x</p></div></div><span class="text-xs font-bold text-slate-800">Rp 89.000</span></div></div><div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1.5"><div class="flex justify-between text-slate-600"><span>Subtotal Item (3 produk)</span><span class="font-medium text-slate-800">Rp 282.000</span></div><div class="flex justify-between text-slate-600"><span>Ongkos Kirim Higienis</span><span class="font-semibold text-emerald-600">Rp 0 (Gratis Ongkir Promo)</span></div><div class="flex justify-between font-bold text-slate-900 pt-2 border-t border-slate-200 text-sm"><span>Total Tagihan Pembayaran</span><span class="text-herbal-700 font-extrabold">Rp 282.000</span></div></div></div><div class="p-4 rounded-2xl bg-white border border-slate-200 space-y-2"><h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck w-3.5 h-3.5 text-herbal-600"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg> Data Penerima &amp; Pengiriman</h3><div class="text-xs text-slate-600 space-y-1 pt-1"><p><span class="font-semibold text-slate-800">Penerima:</span> Budi Pratama (0812-3456-7890)</p><p><span class="font-semibold text-slate-800">Alamat:</span> Jl. Anggrek Cendrawasih No. 24, Sukajadi, Kota Bandung, Jawa Barat 40161</p><p><span class="font-semibold text-slate-800">Estimasi Tiba:</span> 2-3 Hari Kerja (Pengiriman Segel Higienis)</p></div></div><div class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200/80 flex items-start gap-2.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info w-4 h-4 text-herbal-700 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg><p class="text-[11px] text-herbal-900 leading-relaxed"><span class="font-bold">Perhatian:</span> Suplemen &amp; herbal bukan pengganti obat dokter atau tindakan medis. Simpan di tempat sejuk dan terhindar dari sinar matahari langsung.</p></div></div><div class="p-6 border-t border-slate-100 bg-slate-50/90 flex flex-col sm:flex-row items-center justify-between gap-3"><a class="w-full sm:w-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-xl shadow-xs transition flex items-center justify-center gap-2" href="https://wa.me/6281299008800" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle w-4 h-4"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg><span>Cek Status Pesanan via WhatsApp</span></a><div class="flex items-center gap-2 w-full sm:w-auto"><button class="flex-1 sm:flex-initial px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-200/50 rounded-xl border border-slate-200 bg-white transition" onclick="alert('Mengunduh bukti invoice pesanan #HBS-20261118-8492.pdf...')" type="button">Unduh Bukti (PDF)</button><button class="flex-1 sm:flex-initial px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-200/50 rounded-xl border border-slate-200 bg-white transition" onclick="closeSuccessModal()" type="button">Kembali Belanja</button></div></div></div></div></div>
+<!-- END: OrderSuccessModal -->
+<!-- BEGIN: MainFooter (PRD Section 6 Footer) -->
+<footer class="bg-white border-t border-surface-border text-slate-600 text-xs">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+<!-- Brand Info (2 cols) -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-herbal-600 flex items-center justify-center text-white">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sprout" aria-hidden="true" class="lucide lucide-sprout w-4 h-4"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"></path><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"></path><path d="M5 21h14"></path></svg>
+</div>
+<span class="text-lg font-bold text-[#142820]">HerbalStore</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed max-w-sm">
+            Toko online herbal terpercaya yang mengedepankan transparansi kandungan bahan, sertifikasi resmi, dan informasi kesehatan faktual.
+          </p>
+<div class="flex items-center gap-3 pt-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-3.5 h-3.5 text-herbal-600"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Terdaftar BPOM
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-3.5 h-3.5 text-herbal-600"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Halal MUI
+            </span>
+</div>
+</div>
+<!-- Links 1: Kategori Tubuh -->
+<div class="space-y-3">
+<h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Sistem Tubuh</h4>
+<ul class="space-y-2 text-xs">
+<li><a class="hover:text-herbal-700" href="#katalog" onclick="filterByCategory('pencernaan')">Pencernaan</a></li>
+<li><a class="hover:text-herbal-700" href="#katalog" onclick="filterByCategory('darah')">Peredaran Darah</a></li>
+<li><a class="hover:text-herbal-700" href="#katalog" onclick="filterByCategory('pernapasan')">Pernapasan</a></li>
+<li><a class="hover:text-herbal-700" href="#katalog" onclick="filterByCategory('perkemihan')">Perkemihan</a></li>
+<li><a class="hover:text-herbal-700" href="#katalog" onclick="filterByCategory('otak')">Otak &amp; Saraf</a></li>
+<li><a class="hover:text-herbal-700" href="#katalog" onclick="filterByCategory('reproduksi')">Reproduksi</a></li>
+</ul>
+</div>
+<!-- Links 2: Layanan & Kebijakan -->
+<div class="space-y-3">
+<h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Informasi &amp; Bantuan</h4>
+<ul class="space-y-2 text-xs">
+<li><a class="hover:text-herbal-700" href="#edukasi">Disclaimer Medis</a></li>
+<li><a class="hover:text-herbal-700" href="#">Kebijakan Pengiriman</a></li>
+<li><a class="hover:text-herbal-700" href="#">Garansi Produk Asli</a></li>
+<li><a class="hover:text-herbal-700" href="#">Syarat &amp; Ketentuan</a></li>
+<li><a class="hover:text-herbal-700" href="#">Kebijakan Privasi</a></li>
+</ul>
+</div>
+<!-- Links 3: Kontak & Pembayaran -->
+<div class="space-y-3">
+<h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Kontak &amp; Pembayaran</h4>
+<p class="text-xs text-slate-500">Senin - Sabtu: 08:00 - 17:00 WIB</p>
+<div class="flex items-center gap-2 text-slate-700 text-xs">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="message-circle" aria-hidden="true" class="lucide lucide-message-circle w-4 h-4 text-emerald-600"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
+<span>0812-9900-8800 (WhatsApp)</span>
+</div>
+<div class="pt-2">
+<span class="text-[11px] text-slate-400 block mb-1.5 font-medium">Metode Pembayaran Aman:</span>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-semibold text-slate-600 border">QRIS</span>
+<span class="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-semibold text-slate-600 border">BCA</span>
+<span class="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-semibold text-slate-600 border">Mandiri</span>
+<span class="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-semibold text-slate-600 border">BNI</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Copyright & Legal Guardrail -->
+<div class="mt-10 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+<p class="text-[11px] text-slate-400">
+          © 2026 HerbalStore Indonesia. Seluruh hak cipta dilindungi undang-undang.
+        </p>
+<p class="text-[11px] text-slate-400">
+          Informasi pada situs ini bersifat edukatif dan bukan pengganti saran dokter resmi.
+        </p>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: ApplicationScripts -->
+<!-- Script for Cart State Management & Calculations -->
+<script data-purpose="cart-logic">
+    // Initial mock cart items conforming to PRD MVP criteria
+    let cartItems = [
+      {
+        id: 1,
+        name: "Kapsul Ekstrak Temulawak Organik",
+        price: 78000,
+        qty: 1,
+        variant: "60 Kapsul",
+        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 2,
+        name: "Minyak Habbatussauda Nigella Sativa",
+        price: 115000,
+        qty: 1,
+        variant: "100 Kapsul",
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 3,
+        name: "Madu Randu Ekstrak Jahe Merah",
+        price: 89000,
+        qty: 1,
+        variant: "350 gr",
+        image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=500&q=80"
+      }
+    ];
+
+    function formatRupiah(number) {
+      return 'Rp ' + number.toLocaleString('id-ID');
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      const badge = document.getElementById('cart-badge-count');
+      const drawerCount = document.getElementById('cart-drawer-count');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const totalEl = document.getElementById('cart-total');
+
+      const totalQuantity = cartItems.reduce((acc, item) => acc + item.qty, 0);
+      badge.textContent = totalQuantity;
+      drawerCount.textContent = totalQuantity;
+
+      if (cartItems.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12">
+            <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400 mb-3">
+              <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Keranjangmu masih kosong</p>
+            <p class="text-xs text-slate-400 mt-1">Yuk, temukan pilihan herbal yang tepat untukmu.</p>
+          </div>
+        `;
+        subtotalEl.textContent = formatRupiah(0);
+        totalEl.textContent = formatRupiah(0);
+        lucide.createIcons();
+        return;
+      }
+
+      let subtotal = 0;
+      container.innerHTML = cartItems.map(item => {
+        const itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+        return `
+          <div class="flex gap-3 p-3 bg-white rounded-xl border border-slate-100 shadow-2xs items-center">
+            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg bg-slate-50 shrink-0">
+            <div class="flex-1 min-w-0">
+              <h4 class="text-xs font-bold text-slate-800 truncate">${item.name}</h4>
+              <p class="text-[10px] text-slate-400">${item.variant} • ${formatRupiah(item.price)}</p>
+              <div class="flex items-center justify-between mt-2">
+                <div class="flex items-center border border-slate-200 rounded-md bg-white">
+                  <button onclick="updateQty(${item.id}, -1)" class="px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-100 rounded-l">−</button>
+                  <span class="px-2.5 text-xs font-semibold text-slate-800">${item.qty}</span>
+                  <button onclick="updateQty(${item.id}, 1)" class="px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-100 rounded-r">+</button>
+                </div>
+                <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-rose-500 text-xs p-1" title="Hapus">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      subtotalEl.textContent = formatRupiah(subtotal);
+      totalEl.textContent = formatRupiah(subtotal);
+      
+      // Update checkout modal snapshots if open
+      const chkItems = document.getElementById('checkout-summary-items');
+      const chkTotal = document.getElementById('checkout-summary-total');
+      if (chkItems && chkTotal) {
+        chkItems.textContent = `${totalQuantity} item`;
+        chkTotal.textContent = formatRupiah(subtotal);
+      }
+
+      lucide.createIcons();
+    }
+
+    function addToCart(id, name, price, image, variant) {
+      const existing = cartItems.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cartItems.push({ id, name, price, qty: 1, variant, image });
+      }
+      renderCart();
+      toggleCartDrawer(true);
+    }
+
+    function updateQty(id, delta) {
+      const item = cartItems.find(item => item.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cartItems = cartItems.filter(i => i.id !== id);
+      }
+      renderCart();
+    }
+
+    function removeFromCart(id) {
+      cartItems = cartItems.filter(i => i.id !== id);
+      renderCart();
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-backdrop');
+      const panel = document.getElementById('cart-panel');
+
+      if (open) {
+        drawer.classList.remove('pointer-events-none');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100', 'pointer-events-auto');
+        panel.classList.remove('translate-x-full');
+      } else {
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.add('translate-x-full');
+        setTimeout(() => {
+          drawer.classList.add('pointer-events-none');
+        }, 300);
+      }
+    }
+  </script>
+<!-- Script for Filtering, Search & Modals -->
+<script data-purpose="ui-interactions">
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function filterByCategory(categorySlug) {
+      activeCategory = categorySlug;
+      
+      // Update UI active tab pills
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-tab') === categorySlug) {
+          btn.className = "tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-herbal-700 text-white shadow-xs transition";
+        } else {
+          btn.className = "tab-btn px-4 py-2 rounded-full font-medium whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition";
+        }
+      });
+
+      // Update Body System Buttons Highlight
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        if (btn.getAttribute('data-category-slug') === categorySlug) {
+          btn.classList.add('ring-2', 'ring-herbal-600', 'bg-herbal-50');
+        } else {
+          btn.classList.remove('ring-2', 'ring-herbal-600', 'bg-herbal-50');
+        }
+      });
+
+      applyFilters();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.toLowerCase().trim();
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (clearBtn) {
+        if (searchQuery.length > 0) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+      }
+      applyFilters();
+    }
+
+    function clearSearch() {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const items = document.querySelectorAll('.product-item');
+      let visibleCount = 0;
+
+      items.forEach(card => {
+        const itemCategory = card.getAttribute('data-category');
+        const itemName = card.getAttribute('data-name').toLowerCase();
+
+        const matchCategory = (activeCategory === 'all') || (itemCategory === activeCategory);
+        const matchSearch = itemName.includes(searchQuery);
+
+        if (matchCategory && matchSearch) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Update counters & empty state
+      document.getElementById('displayed-count').textContent = visibleCount;
+      const emptyState = document.getElementById('catalog-empty-state');
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+
+    function resetFilters() {
+      clearSearch();
+      filterByCategory('all');
+    }
+
+    function toggleMobileSearch() {
+      const bar = document.getElementById('mobile-search-bar');
+      bar.classList.toggle('hidden');
+    }
+
+    // Checkout Modal Flow
+    function openCheckoutModal() {
+      if (cartItems.length === 0) {
+        alert("Keranjang masih kosong. Pilih produk terlebih dahulu.");
+        return;
+      }
+      toggleCartDrawer(false);
+      document.getElementById('checkout-modal').classList.remove('hidden');
+      renderCart();
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      closeCheckoutModal();
+      
+      // Generate randomized order number
+      const randomId = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('success-order-num').textContent = `HRB-202611-${randomId}`;
+      
+      // Clear cart
+      cartItems = [];
+      renderCart();
+
+      // Show confirmation dialog
+      document.getElementById('order-success-modal').classList.remove('hidden');
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('order-success-modal').classList.add('hidden');
+    }
+
+    // Initialize state on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCart();
+      lucide.createIcons();
+    });
+  </script>
+<!-- END: ApplicationScripts -->
+
+
+</body></html>

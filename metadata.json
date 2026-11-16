@@ -1,0 +1,6 @@
+{
+  "name": "HerbalStore — Katalog Herbal Alami Terpercaya",
+  "description": "Toko online produk herbal alami terdaftar BPOM dengan navigasi sistem tubuh, informasi komposisi transparan, guest checkout 3 langkah, dan pelacakan pengiriman.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
