@@ -2,6 +2,13 @@ import { ArrowRight, ShieldCheck, ShoppingBag, Tag, Trash2, X } from 'lucide-rea
 import { useState } from 'react';
 import type { CartItem } from '../types/herbal.ts';
 import { formatRupiah } from '../utils/format.ts';
+import {
+  FREE_SHIPPING_THRESHOLD,
+  PROMO_CODE,
+  PROMO_MIN_SUBTOTAL,
+  calculateOrderTotals,
+  isPromoEligible,
+} from '../utils/pricing.ts';
 import { ResilientImage } from './ResilientImage.tsx';
 
 interface CartDrawerProps {
@@ -32,12 +39,9 @@ export function CartDrawer({
 
   const totalQuantity = items.reduce((acc, item) => acc + item.qty, 0);
   const subtotal = items.reduce((acc, item) => acc + item.price * item.qty, 0);
-  const freeShippingThreshold = 150000;
-  const freeShippingReached = subtotal >= freeShippingThreshold;
-  const shippingCost = items.length === 0 ? 0 : freeShippingReached ? 0 : 18000;
-  const activePromo = promoCode.trim().toUpperCase() === 'HERBALAWAL' && subtotal >= 100000;
-  const discount = activePromo ? Math.round(subtotal * 0.1) : 0;
-  const total = Math.max(0, subtotal - discount + shippingCost);
+  const freeShippingThreshold = FREE_SHIPPING_THRESHOLD;
+  const { discount, shippingCost, total, freeShippingReached, promoApplied: activePromo } =
+    calculateOrderTotals(subtotal, 'regular', promoCode);
 
   const handleApplyPromo = () => {
     const cleaned = promoInput.trim().toUpperCase();
@@ -46,16 +50,16 @@ export function CartDrawer({
       setPromoFeedback(null);
       return;
     }
-    if (cleaned !== 'HERBALAWAL') {
-      setPromoFeedback('Kode promo tidak dikenali. Gunakan kode HERBALAWAL.');
+    if (cleaned !== PROMO_CODE) {
+      setPromoFeedback(`Kode promo tidak dikenali. Gunakan kode ${PROMO_CODE}.`);
       return;
     }
-    if (subtotal < 100000) {
-      setPromoFeedback('Kode HERBALAWAL berlaku untuk minimal belanja Rp 100.000.');
+    if (subtotal < PROMO_MIN_SUBTOTAL) {
+      setPromoFeedback(`Kode ${PROMO_CODE} berlaku untuk minimal belanja ${formatRupiah(PROMO_MIN_SUBTOTAL)}.`);
       return;
     }
-    onApplyPromoCode('HERBALAWAL');
-    setPromoFeedback('Diskon 10% (HERBALAWAL) berhasil diterapkan.');
+    onApplyPromoCode(PROMO_CODE);
+    setPromoFeedback(`Diskon 10% (${PROMO_CODE}) berhasil diterapkan.`);
   };
 
   return (

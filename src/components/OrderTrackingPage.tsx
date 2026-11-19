@@ -486,9 +486,16 @@ export function OrderTrackingPage({
           <div className="lg:col-span-5 space-y-6">
             {/* Recipient Card */}
             <section className="bg-white rounded-3xl border border-surface-border p-5 sm:p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-800 uppercase tracking-wider">
-                <MapPin className="w-4 h-4 text-herbal-600" />
-                <span>Tujuan Pengiriman &amp; Penerima</span>
+              <div className="flex items-center justify-between gap-2 text-xs font-bold text-slate-800 uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-herbal-600" />
+                  <span>Tujuan Pengiriman &amp; Penerima</span>
+                </div>
+                {order.phone.includes('*') && (
+                  <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 normal-case">
+                    Privasi Terlindungi
+                  </span>
+                )}
               </div>
 
               <div className="flex items-center justify-between gap-2">

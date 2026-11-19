@@ -4,6 +4,16 @@ export function formatRupiah(amount: number): string {
   return 'Rp ' + amount.toLocaleString('id-ID');
 }
 
+export function escapeHtml(str: string | undefined | null): string {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export function downloadOrderInvoice(order: OrderRecord): void {
   const itemRows = order.items
     .map(
@@ -11,8 +21,8 @@ export function downloadOrderInvoice(order: OrderRecord): void {
       <tr>
         <td style="padding:10px 8px;border-bottom:1px solid #e5e7eb;">${idx + 1}</td>
         <td style="padding:10px 8px;border-bottom:1px solid #e5e7eb;">
-          <strong>${item.productName}</strong><br/>
-          <span style="color:#64748b;font-size:12px;">${item.variantLabel} · ${item.registrationNumber}</span>
+          <strong>${escapeHtml(item.productName)}</strong><br/>
+          <span style="color:#64748b;font-size:12px;">${escapeHtml(item.variantLabel)} · ${escapeHtml(item.registrationNumber)}</span>
         </td>
         <td style="padding:10px 8px;border-bottom:1px solid #e5e7eb;text-align:center;">${item.quantity}</td>
         <td style="padding:10px 8px;border-bottom:1px solid #e5e7eb;text-align:right;">${formatRupiah(item.unitPrice)}</td>
@@ -21,11 +31,23 @@ export function downloadOrderInvoice(order: OrderRecord): void {
     )
     .join('');
 
+  const safeOrderNumber = escapeHtml(order.orderNumber);
+  const safeCreatedAt = escapeHtml(order.createdAtLabel);
+  const safeAwb = escapeHtml(order.awbNumber);
+  const safeCustomerName = escapeHtml(order.customerName);
+  const safePhone = escapeHtml(order.phone);
+  const safeAddress = escapeHtml(order.address);
+  const safeCity = escapeHtml(order.city);
+  const safePostalCode = escapeHtml(order.postalCode);
+  const safeCourierName = escapeHtml(order.courierName);
+  const safeStatus = escapeHtml(order.status);
+  const safePaymentStatus = escapeHtml(order.paymentStatus);
+
   const html = `<!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <title>Invoice ${order.orderNumber} — HerbalStore</title>
+  <title>Invoice ${safeOrderNumber} — HerbalStore</title>
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; color: #1a2e26; max-width: 760px; margin: 32px auto; padding: 0 20px; }
     .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #059669; padding-bottom: 16px; margin-bottom: 24px; }
@@ -49,22 +71,22 @@ export function downloadOrderInvoice(order: OrderRecord): void {
       <div style="font-size:12px;color:#64748b;">Katalog Herbal Alami Terdaftar BPOM</div>
     </div>
     <div class="meta">
-      <div><strong>Invoice:</strong> ${order.orderNumber}</div>
-      <div><strong>Tanggal:</strong> ${order.createdAtLabel}</div>
-      <div><strong>Resi (AWB):</strong> ${order.awbNumber}</div>
+      <div><strong>Invoice:</strong> ${safeOrderNumber}</div>
+      <div><strong>Tanggal:</strong> ${safeCreatedAt}</div>
+      <div><strong>Resi (AWB):</strong> ${safeAwb}</div>
     </div>
   </div>
   <div class="grid">
     <div class="box">
       <div style="font-weight:700;margin-bottom:6px;">Penerima & Tujuan</div>
-      <div>${order.customerName} (${order.phone})</div>
-      <div>${order.address}, ${order.city} ${order.postalCode}</div>
+      <div>${safeCustomerName} (${safePhone})</div>
+      <div>${safeAddress}, ${safeCity} ${safePostalCode}</div>
     </div>
     <div class="box">
       <div style="font-weight:700;margin-bottom:6px;">Pengiriman & Pembayaran</div>
-      <div>Ekspedisi: ${order.courierName}</div>
-      <div>Status Pesanan: ${order.status}</div>
-      <div>Status Pembayaran: ${order.paymentStatus}</div>
+      <div>Ekspedisi: ${safeCourierName}</div>
+      <div>Status Pesanan: ${safeStatus}</div>
+      <div>Status Pembayaran: ${safePaymentStatus}</div>
     </div>
   </div>
   <table>
@@ -95,7 +117,7 @@ export function downloadOrderInvoice(order: OrderRecord): void {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `Invoice-${order.orderNumber.replace('#', '')}.html`;
+  link.download = `Invoice-${order.orderNumber.replace(/[^a-zA-Z0-9_-]/g, '')}.html`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

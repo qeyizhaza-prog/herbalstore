@@ -28,50 +28,16 @@ import type {
 
 const CART_STORAGE_KEY = 'herbalstore_mvp_cart_v1';
 
-const INITIAL_CART: CartItem[] = [
-  {
-    productId: PRODUCTS[0].id,
-    variantId: PRODUCTS[0].variants?.[0].id,
-    name: PRODUCTS[0].name,
-    variantLabel: PRODUCTS[0].packageSize,
-    registrationNumber: PRODUCTS[0].registrationNumber,
-    price: PRODUCTS[0].price,
-    qty: 1,
-    maxStock: PRODUCTS[0].stock,
-    image: PRODUCTS[0].image,
-  },
-  {
-    productId: PRODUCTS[1].id,
-    variantId: PRODUCTS[1].variants?.[0].id,
-    name: PRODUCTS[1].name,
-    variantLabel: PRODUCTS[1].packageSize,
-    registrationNumber: PRODUCTS[1].registrationNumber,
-    price: PRODUCTS[1].price,
-    qty: 1,
-    maxStock: PRODUCTS[1].stock,
-    image: PRODUCTS[1].image,
-  },
-  {
-    productId: PRODUCTS[2].id,
-    variantId: PRODUCTS[2].variants?.[0].id,
-    name: PRODUCTS[2].name,
-    variantLabel: PRODUCTS[2].packageSize,
-    registrationNumber: PRODUCTS[2].registrationNumber,
-    price: PRODUCTS[2].price,
-    qty: 1,
-    maxStock: PRODUCTS[2].stock,
-    image: PRODUCTS[2].image,
-  },
-];
+const INITIAL_CART: CartItem[] = [];
 
 function loadSessionCart(): CartItem[] {
   try {
     const raw = sessionStorage.getItem(CART_STORAGE_KEY);
-    if (!raw) return INITIAL_CART;
+    if (!raw) return [];
     const parsed = JSON.parse(raw) as CartItem[];
-    return Array.isArray(parsed) ? parsed : INITIAL_CART;
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
-    return INITIAL_CART;
+    return [];
   }
 }
 
@@ -364,6 +330,10 @@ export default function App() {
     try {
       const res = await fetch(`/api/orders/${cleaned}/verify-payment`, {
         method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-demo-action': 'simulated-payment',
+        },
       });
       const contentType = res.headers.get('content-type') || '';
       if (contentType.includes('application/json')) {

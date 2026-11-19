@@ -6,6 +6,7 @@ import type {
   OrderRecord,
   Product,
 } from '../types/herbal.ts';
+import { calculateOrderTotals } from './pricing.ts';
 
 const ORDERS_STORAGE_KEY = 'herbalstore_orders_v1';
 
@@ -67,8 +68,14 @@ export function createOrderLocally(
 
     if (variant) {
       variant.stock = Math.max(0, variant.stock - cartItem.qty);
+      if (product.variants && product.variants.length > 0) {
+        product.stock = product.variants.reduce((acc, v) => acc + v.stock, 0);
+      } else {
+        product.stock = Math.max(0, product.stock - cartItem.qty);
+      }
+    } else {
+      product.stock = Math.max(0, product.stock - cartItem.qty);
     }
-    product.stock = Math.max(0, product.stock - cartItem.qty);
 
     const lineTotal = unitPrice * cartItem.qty;
     subtotal += lineTotal;
@@ -84,28 +91,26 @@ export function createOrderLocally(
     });
   }
 
-  const promoNormalized = (form.promoCode || '').trim().toUpperCase();
-  const discount =
-    promoNormalized === 'HERBALAWAL' && subtotal >= 100000
-      ? Math.round(subtotal * 0.1)
-      : 0;
-  const shippingCost =
-    form.shippingMethod === 'express' ? 15000 : subtotal >= 150000 ? 0 : 18000;
-  const total = Math.max(0, subtotal - discount + shippingCost);
+  const { discount, shippingCost, total } = calculateOrderTotals(
+    subtotal,
+    form.shippingMethod,
+    form.promoCode
+  );
 
   const now = new Date();
-  const suffix = Math.floor(1000 + Math.random() * 9000);
-  const orderNumber = `#HBS-20261118-${suffix}`;
-  const awbNumber = `HBS${Math.floor(1000000000 + Math.random() * 8999999999)}ID`;
+  const uniqueCode = `${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+  const orderNumber = `#HBS-${uniqueCode}`;
+  const awbNumber = `HBS${Date.now().toString().slice(-6)}${Math.floor(100000 + Math.random() * 900000)}ID`;
   const timeLabel = `${now.getDate()} Nov 2026, ${String(now.getHours()).padStart(
     2,
     '0'
   )}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
   const digits = form.phone.replace(/\D/g, '');
   const vaPrefix = form.paymentMethod === 'va_mandiri' ? '8950' : '8271';
+  const randomPin = Math.floor(1000 + Math.random() * 9000);
   const vaNumber = `${vaPrefix} ${digits.slice(0, 4).padEnd(4, '0')} ${digits
     .slice(4, 8)
-    .padEnd(4, '0')} ${suffix}`;
+    .padEnd(4, '0')} ${randomPin}`;
 
   const order: OrderRecord = {
     orderNumber,

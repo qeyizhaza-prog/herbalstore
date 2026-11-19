@@ -17,6 +17,7 @@ import type {
   ShippingMethod,
 } from '../types/herbal.ts';
 import { formatRupiah } from '../utils/format.ts';
+import { calculateOrderTotals, calculateShippingCost } from '../utils/pricing.ts';
 
 interface CheckoutModalProps {
   open: boolean;
@@ -42,12 +43,12 @@ export function CheckoutModal({
   const [idempotencyKey] = useState(() => `chk-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`);
 
   const [form, setForm] = useState<CheckoutFormData>({
-    customerName: 'Budi Pratama',
-    phone: '0812-3456-7890',
-    address: 'Jl. Anggrek Cendrawasih No. 24, Sukajadi',
-    city: 'Kota Bandung, Jawa Barat',
-    postalCode: '40161',
-    notes: 'Titip sekuriti pos gerbang jika tidak ada orang di rumah.',
+    customerName: '',
+    phone: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    notes: '',
     shippingMethod: 'regular',
     paymentMethod: 'qris',
     promoCode: initialPromoCode,
@@ -57,11 +58,12 @@ export function CheckoutModal({
 
   const subtotal = items.reduce((acc, item) => acc + item.price * item.qty, 0);
   const itemCount = items.reduce((acc, item) => acc + item.qty, 0);
-  const regularShipping = subtotal >= 150000 ? 0 : 18000;
-  const shippingCost = form.shippingMethod === 'express' ? 15000 : regularShipping;
-  const promoApplied = form.promoCode.trim().toUpperCase() === 'HERBALAWAL' && subtotal >= 100000;
-  const discount = promoApplied ? Math.round(subtotal * 0.1) : 0;
-  const total = Math.max(0, subtotal - discount + shippingCost);
+  const { discount, shippingCost, total } = calculateOrderTotals(
+    subtotal,
+    form.shippingMethod,
+    form.promoCode
+  );
+  const regularShipping = calculateShippingCost(subtotal, 'regular');
 
   const validateStep1 = (): boolean => {
     const errors: Partial<Record<keyof CheckoutFormData, string>> = {};
